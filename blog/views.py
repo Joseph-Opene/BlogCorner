@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 and we show the post we made from our command line and pass it into the context as
 Post.objects.all()
 '''
-from .models import Post, Likes
+from .models import Post, Likes, Share
 #We import the user as we will be using the user model in our UserPostListView
 from django.contrib.auth.models import User
 #importing a function that would take us to a particular blog so well see all the content, details and comments. Then change it to our home view in the urls
@@ -53,7 +53,7 @@ class UserPostListView(ListView):
     #Getting posts by a particuler user/username
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Post.objects.filter(author=user).order_by('-date_posted')
+        return Post.objects.filter(Q(author=user)|Q(shares__shared_by=user.id)).order_by('-date_posted')
 
 #creating a view for individual posts.. we'll import DetailViews to look at the details of a single view, and add the path to our url
 class PostDetailView(DetailView):
@@ -111,5 +111,18 @@ def like_post(request, pk):
         post.save()
         liked_post = Likes(post=post, liked_by=user.id)
         liked_post.save()
+    #posts = Post.objects.all()
+    return redirect('blog-home')
+
+@login_required
+def share_post(request, pk):
+    user = request.user
+    post = Post.objects.get(pk=pk)
+    share = Share.objects.filter(Q(shared_by=user.id)&Q(post=post.id))
+    if not share:
+        post.number_of_shares += 1
+        post.save()
+        shared_post = Share(post=post, shared_by=user.id)
+        shared_post.save()
     #posts = Post.objects.all()
     return redirect('blog-home')

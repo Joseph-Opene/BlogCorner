@@ -13,6 +13,8 @@
 <!--adding the like button and like counter to our blog-->
             <div class="ml-2">
                 <a class="btn btn-info" role="button" href="{% url 'like' post.id %}">like</a>
+                <a class="btn btn-info pl-2" role="button" href="{% url 'shares' post.id %}">share</a>
+                <span class="pl-2">{{post.number_of_shares}}</span>
             </div>
           </div>
              <span class="ml-2">{{post.number_of_likes}} likes</span>
