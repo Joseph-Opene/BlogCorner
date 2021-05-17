@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'crispy_forms',
     'whitenoise.runserver_nostatic',
-    'django.contrib.staticfiles',
+    #'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
