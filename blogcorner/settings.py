@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'td9@w7=%qv^j5fcovtpkp2p7i5cmc#01ga)xkaglv-(9h*po9a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -131,7 +131,7 @@ WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #static is the css we need for our display
 STATIC_URL = '/static/'
-if DEBUG:
+if not DEBUG:
    STATICFILES_DIRS = [
    os.path.join(BASE_DIR, 'static'),
    ]
