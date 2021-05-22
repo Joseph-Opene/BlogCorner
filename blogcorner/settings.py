@@ -131,7 +131,7 @@ WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #static is the css we need for our display
 STATIC_URL = '/static/'
-if not DEBUG:
+if DEBUG:
    STATICFILES_DIRS = [
    os.path.join(BASE_DIR, 'static'),
    ]
