@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'blogcorner.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'esskzztrgjmiui',
+        'NAME': 'd4mteh524qbaj',
+        'HOST': 'ec2-107-20-153-39.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'PASSWORD': 'fdd0a479ee9f60597ec20d0edd9df8819f260e5698f3014b6632ee78e83516ed',
     }
 }
 
