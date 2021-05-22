@@ -131,12 +131,13 @@ WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #static is the css we need for our display
 STATIC_URL = '/static/'
-if DEBUG:
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+'''if DEBUG:
    STATICFILES_DIRS = [
    os.path.join(BASE_DIR, 'static'),
    ]
 else:
-   STATIC_ROOT = os.path.join(BASE_DIR,'static')
+   STATIC_ROOT = os.path.join(BASE_DIR,'static')'''
 
 #media is the pictures we'll have in our blogs
 MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
