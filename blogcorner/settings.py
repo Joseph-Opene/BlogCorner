@@ -82,12 +82,12 @@ WSGI_APPLICATION = 'blogcorner.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'esskzztrgjmiui',
-        'NAME': 'd4mteh524qbaj',
-        'HOST': 'ec2-107-20-153-39.compute-1.amazonaws.com',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'USER': 'tglrlkrrpeorbr',
+        'NAME': 'davk638kd019kp',
+        'HOST': 'ec2-52-0-114-209.compute-1.amazonaws.com',
         'PORT': '5432',
-        'PASSWORD': 'fdd0a479ee9f60597ec20d0edd9df8819f260e5698f3014b6632ee78e83516ed',
+        'PASSWORD': '75e6bd7755b72d9abb4e9558a47b9a5d728b3c500499ed62c6203f951293539d',
     }
 }
 
