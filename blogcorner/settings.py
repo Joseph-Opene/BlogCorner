@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'crispy_forms',
     'whitenoise.runserver_nostatic',
-    #'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,11 @@ USE_L10N = True
 USE_TZ = True
 
 
+CLOUDINARY_STORAGE = {
+'CLOUD_NAME':'wasps',
+'API_KEY':'116667873196948',
+'API_SECRET':'JOQxPZl8REbOVc75Ny9eQMpeFmI'
+}
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 WHITENOISE_USE_FINDERS = True
@@ -140,8 +146,9 @@ else:
    STATIC_ROOT = os.path.join(BASE_DIR,'static')'''
 
 #media is the pictures we'll have in our blogs
-MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
+#MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 #installed crispy forms a 3rd party app to help make our forms better and makes our validation error clearer so we know what to change. And we want it to use bootstrap4
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

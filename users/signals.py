@@ -5,7 +5,7 @@ this part is for creating profile for new users that register so we dont have to
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-from .models import Profile
+from .models import Profile, Gallery
 
 
 @receiver(post_save, sender=User)

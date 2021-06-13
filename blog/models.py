@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 class Post(models.Model):
+
+
     title = models.CharField(max_length=100)
     content = models.TextField()
     number_of_likes = models.IntegerField(default=0)
@@ -29,6 +31,8 @@ class Post(models.Model):
 
 #adding the like button and like counter to our blog
 class Likes(models.Model):
+
+
     post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
     time_liked = models.DateTimeField(default=timezone.now)
     liked_by = models.IntegerField(blank=False)
@@ -38,6 +42,8 @@ class Likes(models.Model):
 
 
 class Share(models.Model):
+
+
     post = models.ForeignKey(Post, related_name='shares', on_delete=models.CASCADE)
     shared_by = models.IntegerField(blank=False)
     quote = models.CharField(max_length=255, blank=True,default='')
@@ -45,4 +51,16 @@ class Share(models.Model):
 
     def __str__(self):
         return f"Share({self.post.title}, {self.shared_by})"
+'''
+class Comment(models.Model):
 
+
+    post = models.ForeignKey(Post,related_name='comments', on_delete=models.CASCADE)
+    comment = models.CharField(max_length=255,blank=False)
+    commented_by = models.ForeignKey(User,related_name='my_comments', on_delete=models.CASCADE)
+    comment_date = models.DateTimeField(default=timezone.now)
+    replying_to = models.ForeignKey('self', null=True, related_name='replies', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Comment({self.post.title}, {self.comment})"
+'''

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 #importing the profile model so user can change profile pic
-from .models import Profile
+from .models import Profile, Gallery
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -26,4 +26,8 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['image']
 
-#we'll update these two new forms in our vie
+class GalleryForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = ['uploads']
+#we'll update these two new forms in our view

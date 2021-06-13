@@ -126,3 +126,11 @@ def share_post(request, pk):
         shared_post.save()
     #posts = Post.objects.all()
     return redirect('blog-home')
+
+'''
+@login_required
+def post_comments(request,pk):
+    try:
+        post = Post.objects.get(pk=pk)
+        if request.methods == 'GET':
+            comments = post.comments'''
