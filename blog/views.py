@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 #We import the get_object_or_404 so when we try to find post for a user that doest exist in our UserPostListView it shows us error 404.
 '''we get rid of our dummy data for the posts and import the Post from the models,
 and we show the post we made from our command line and pass it into the context as
 Post.objects.all()
 '''
-from .models import Post, Likes, Share
+from .models import Post, Likes, Share,Comment
+from .forms import CommentForm
 #We import the user as we will be using the user model in our UserPostListView
 from django.contrib.auth.models import User
 #importing a function that would take us to a particular blog so well see all the content, details and comments. Then change it to our home view in the urls
@@ -56,8 +58,29 @@ class UserPostListView(ListView):
         return Post.objects.filter(Q(author=user)|Q(shares__shared_by=user.id)).order_by('-date_posted')
 
 #creating a view for individual posts.. we'll import DetailViews to look at the details of a single view, and add the path to our url
-class PostDetailView(DetailView):
-    model = Post
+#class PostDetailView(DetailView):
+#    model = Post
+@login_required
+def getpostdetail(request,pk):
+    post = Post.objects.filter(pk=pk).first()
+    comments = post.comments.all()
+    if request.method == 'POST':
+        commentform = CommentForm(request.POST,instance=request.user)
+        if commentform.is_valid():
+            my_comment = Comment(post=post,comment=commentform.cleaned_data['comment'],commented_by=request.user)
+            my_comment.save()
+            messages.success(request,"Comments was successful")
+            redirect('post-detail',pk)
+    form = CommentForm()
+    context = {
+    'object':post,
+    'comments':comments,
+    'form':form
+    }
+
+    return render(request,'blog/post_detail.html',context)
+
+
 
 
 #users creating post from the page and we dont have to do it from the command line or the admin and add the path to our url

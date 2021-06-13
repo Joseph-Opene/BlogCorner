@@ -51,9 +51,9 @@ class Share(models.Model):
 
     def __str__(self):
         return f"Share({self.post.title}, {self.shared_by})"
-'''
-class Comment(models.Model):
 
+
+class Comment(models.Model):
 
     post = models.ForeignKey(Post,related_name='comments', on_delete=models.CASCADE)
     comment = models.CharField(max_length=255,blank=False)
@@ -63,4 +63,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment({self.post.title}, {self.comment})"
-'''
